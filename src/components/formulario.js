@@ -148,9 +148,25 @@ const Formulario = (modalVisible, setModalVisible) => {
 
           </View>
 
-          <Pressable style={styles.btnNuevaCita}>
+          <Pressable style={styles.btnNuevaCita} onPress={action}>
             <Text style={styles.btnNuevaCitaTexto}>Agregar paciente</Text>
+            
+            action={() =>{
+              let err = {};
+              if (!paciente) err ={...err, paciente: 'llenar los campos vacios'};
+              if (!nombrePropietario) err ={...err, nombrePropietario: 'llenar los campos vacios'};
+              if (!telefono) err ={...err, telefono: 'llenar los campos vacios'};
+              if (!email) err ={...err, email: 'llenar los campos vacios'};
+              if (!sintomas) err ={...err, sintomas: 'llenar los campos vacios'};
+
+              if (err.paciente || err.nombrePropietario || err.telefono || err. email || err.sintomas){
+                setErrors (_errors =>  ({..._errors, ...errors}))
+              } else{
+                alert('Cita guardada con ecito!')
+              }
+            }}
           </Pressable>
+          
 
         </ScrollView>
       </View>
