@@ -1,3 +1,3 @@
-Proyecto Mobile Jucar
+
 
 # Aplicación de refrigerio de muestra Abra el archivo `App.js` para comenzar a escribir código. Puede obtener una vista previa de los cambios directamente en su teléfono o tableta escaneando el **código QR** o utilizar los emuladores de iOS o Android. Cuando hayas terminado, haz clic en **Guardar** y comparte el enlace. Cuando esté listo para ver todo lo que Expo ofrece (o si desea usar su propio editor), puede **Descargar** su proyecto y usarlo con [expo cli](https://docs.expo.dev/ introducción/instalación/#expo-cli)). Todos los proyectos creados en Snack están disponibles públicamente, por lo que puede compartir fácilmente el enlace a este proyecto mediante un enlace o incrustarlo en una página web con el botón `<>`. Si tiene problemas, puede enviarnos un tweet a [@expo](https://twitter.com/expo) o preguntarnos en nuestro sitio web de código abierto. Puede encontrar el código en el [repositorio de GitHub](https://github.com/expo/snack).
