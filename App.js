@@ -1,10 +1,12 @@
 import { StyleSheet, Text, View, Pressable, Modal, Button, Image } from 'react-native';
 import {useState} from 'react';
 import Formulario from './src/components/formulario'; // Sin llaves
+import { FlatList } from 'react-native-web';
 
 
 export default function App() {
 const [modalVisble, setModalVisible] = useState(false)
+const [paciente, setPaciente] = useState([])
 console.log(modalVisble)  
 
   const nuevaCita = () => {
@@ -21,12 +23,30 @@ console.log(modalVisble)
         style={{ width: 300, height: 170,  }}
       />
       <Text style={styles.textmarca}> Veterinay clinic </Text>
+
       <Pressable onPress={()=> setModalVisible(true)} 
       style={styles.btnnuevacita}>
         <Text style={styles.btntextnuevacita}> Nueva Cita</Text>
       </Pressable>
+      {paciente.length ===0?
+        <Text style={styles.noPaciente}>No hya Pacientes</Text>:
+        <FlatList
+          data={paciente}
+          keyExtractor={({item})=>{
+            return(
+              <paciente>
+                item={item}
+              </paciente>
+            )
+          }}
+        />
+      };
+      
       <Formulario
         modalVisble ={modalVisble}
+        setModalVisible = {setModalVisible}
+        paciente ={paciente}
+        setPaciente ={setPaciente}
       />
       <Text style={styles.maracAgua}> Daniel galindo 2558108 </Text>
       
@@ -84,5 +104,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#black',
     fontWeight: 900,
 
+  },
+  noPaciente:{
+    marginTop:40,
+    textAlign:'center',
+    fontSize: 24,
+    fontWeight: '600'
   }
+
 });

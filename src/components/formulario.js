@@ -1,40 +1,45 @@
 import React from 'react';
-import { Modal,Text,Button,StyleSheet,View, TextInput, ScrollView, Pressable } from 'react-native';
+import { Modal,Text,Button,StyleSheet,View, TextInput, ScrollView, Pressable, Alert} from 'react-native';
 import DateTimePicker from 'react-native-ui-datepicker';
 import { useState } from "react";
 
-
-
-const Formulario = (modalVisible, setModalVisible) => {
+const Formulario = (modalVisible, setModalVisible, paciente, setPaciente) => {
   const [fecha, setFecha] = useState(new Date());
   const [paciente, setPaciente] = useState("");
   const [nombrePropietario, setPropietario] = useState("");
   const [email, setEmail] = useState("");
   const [telefono, setTelefono] = useState("");
   const [sintomas, setSintomas] = useState("");
-  const [errors, setErrors] = useState ({
-    paciente: '',
-    nombrePropietario: '',
-    email : '',
-    telefono: '',
-    sintomas: '',
-    
-  })
 
-  const cleanState = ()=>{
-      setFecha('');
-      setPaciente('');
-      setPropietario('');
-      setEmail('');
-      setSintomas('');
-      setErrors({
-        paciente: '',
-        nombrePropietario: '',
-        email: '',
-        telefono: '',
-        sintomas:'',
-      })
+  const handlCita =()=>{
+    if([paciente,nombrePropietario,email,fecha,sintomas].includes('')){
+      Alert.alert(
+        'Error',
+        'Todos los campos son obligatorios'
+      )
+      return
+
+    }
+    const nuuevoPaciente ={
+      id: Date.now(),
+      paciente,
+      nombrePropietario,
+      email,
+      telefono,
+      fecha,
+      sintomas
+    }
+    setPaciente([...paciente, nuuevoPaciente])
+    setModalVisible(!modalVisible)
+
+    setPaciente('')
+    setPropietario('')
+    setEmail('')
+    setTelefono('')
+    setFecha(new Date())
+    setSintomas
   }
+  
 
   return (
     <Modal animationType="slide" visible={modalVisible}>
@@ -150,21 +155,6 @@ const Formulario = (modalVisible, setModalVisible) => {
 
           <Pressable style={styles.btnNuevaCita} onPress={action}>
             <Text style={styles.btnNuevaCitaTexto}>Agregar paciente</Text>
-            
-            action={() =>{
-              let err = {};
-              if (!paciente) err ={...err, paciente: 'llenar los campos vacios'};
-              if (!nombrePropietario) err ={...err, nombrePropietario: 'llenar los campos vacios'};
-              if (!telefono) err ={...err, telefono: 'llenar los campos vacios'};
-              if (!email) err ={...err, email: 'llenar los campos vacios'};
-              if (!sintomas) err ={...err, sintomas: 'llenar los campos vacios'};
-
-              if (err.paciente || err.nombrePropietario || err.telefono || err. email || err.sintomas){
-                setErrors (_errors =>  ({..._errors, ...errors}))
-              } else{
-                alert('Cita guardada con ecito!')
-              }
-            }}
           </Pressable>
           
 
